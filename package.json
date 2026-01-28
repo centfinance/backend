@@ -1,6 +1,6 @@
 {
     "name": "backend",
-    "version": "1.58.12",
+    "version": "1.58.7",
     "description": "Backend service for Beethoven X and Balancer",
     "repository": "https://github.com/balancer/backend",
     "author": "Beethoven X",
@@ -10,6 +10,7 @@
         "start": "node dist/apps/main.js",
         "dev": "bun --hot run apps/main.ts",
         "build": "tsc -p tsconfig.build.json",
+        "deploy": "./scripts/deploy.sh",
         "cleanup-console": "find dist -type f -name \"*.js\" -exec sed -i '/console\\.time(\\(.*\\))\\;/d;/console\\.timeEnd(\\(.*\\))\\;/d' {} \\;",
         "generate": "graphql-codegen --config codegen.ts",
         "test": "vitest",
@@ -59,7 +60,7 @@
         "prisma": "^6.3.0",
         "stellate": "2.7.1",
         "ts-dotenv": "^0.8.4",
-        "viem": "2.40.0"
+        "viem": "^2.38.5"
     },
     "devDependencies": {
         "@changesets/cli": "^2.27.12",

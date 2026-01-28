@@ -14,9 +14,9 @@ enum GqlChain {
     PLASMA
     ZKEVM
     SEPOLIA
+    SWELLCHAIN_SEPOLIA
     FRAXTAL
     MODE
     SONIC
     XLAYER
-    MONAD
 }

@@ -8,6 +8,7 @@ import mainnetConfig from './mainnet';
 import optimismConfig from './optimism';
 import polygonConfig from './polygon';
 import sepoliaConfig from './sepolia';
+import swellchainSepoliaConfig from './swellchain-sepolia';
 import zkevmConfig from './zkevm';
 import fraxtalConfig from './fraxtal';
 import modeConfig from './mode';
@@ -15,7 +16,6 @@ import sonicConfig from './sonic';
 import hyperevmConfig from './hyperevm';
 import plasmaNetworkConfig from './plasma';
 import xlayerNetworkConfig from './xlayer';
-import monadNetworkConfig from './monad';
 
 export const DAYS_OF_HOURLY_PRICES = 100;
 export const BALANCES_SYNC_BLOCKS_MARGIN = 200;
@@ -30,6 +30,7 @@ export default {
     [Chain.OPTIMISM]: optimismConfig,
     [Chain.POLYGON]: polygonConfig,
     [Chain.SEPOLIA]: sepoliaConfig,
+    [Chain.SWELLCHAIN_SEPOLIA]: swellchainSepoliaConfig,
     [Chain.ZKEVM]: zkevmConfig,
     [Chain.FRAXTAL]: fraxtalConfig,
     [Chain.MODE]: modeConfig,
@@ -37,5 +38,4 @@ export default {
     [Chain.HYPEREVM]: hyperevmConfig,
     [Chain.PLASMA]: plasmaNetworkConfig,
     [Chain.XLAYER]: xlayerNetworkConfig,
-    [Chain.MONAD]: monadNetworkConfig,
 };

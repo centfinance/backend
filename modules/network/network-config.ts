@@ -11,12 +11,12 @@ import { baseNetworkConfig } from './base';
 import { fraxtalNetworkConfig } from './fraxtal';
 import { Chain } from '@prisma/client';
 import { sepoliaNetworkConfig } from './sepolia';
+import { swellchainSepoliaNetworkConfig } from './swellchain-sepolia';
 import { modeNetworkConfig } from './mode';
 import { sonicNetworkConfig } from './sonic';
 import { hyperevmNetworkConfig } from './hyperevm';
 import { plasmaNetworkConfig } from './plasma';
-import { xlayerNetworkConfig } from './xlayer';
-import { monadNetworkConfig } from './monad';
+import { xlayerNetworkConfig } from './xlayer'; 
 
 export const AllNetworkConfigs: { [chainId: string]: NetworkConfig } = {
     '250': fantomNetworkConfig,
@@ -29,13 +29,13 @@ export const AllNetworkConfigs: { [chainId: string]: NetworkConfig } = {
     '43114': avalancheNetworkConfig,
     '8453': baseNetworkConfig,
     '11155111': sepoliaNetworkConfig,
+    '1924': swellchainSepoliaNetworkConfig,
     '252': fraxtalNetworkConfig,
     '34443': modeNetworkConfig,
     '146': sonicNetworkConfig,
     '999': hyperevmNetworkConfig,
     '9745': plasmaNetworkConfig,
     '196': xlayerNetworkConfig,
-    '143': monadNetworkConfig,
 };
 
 export const AllNetworkConfigsKeyedOnChain: { [chain in Chain]: NetworkConfig } = {
@@ -49,13 +49,13 @@ export const AllNetworkConfigsKeyedOnChain: { [chain in Chain]: NetworkConfig } 
     AVALANCHE: avalancheNetworkConfig,
     BASE: baseNetworkConfig,
     SEPOLIA: sepoliaNetworkConfig,
+    SWELLCHAIN_SEPOLIA: swellchainSepoliaNetworkConfig,
     FRAXTAL: fraxtalNetworkConfig,
     MODE: modeNetworkConfig,
     SONIC: sonicNetworkConfig,
     HYPEREVM: hyperevmNetworkConfig,
     PLASMA: plasmaNetworkConfig,
     XLAYER: xlayerNetworkConfig,
-    MONAD: monadNetworkConfig,
 };
 
 export const BalancerChainIds = [
@@ -67,11 +67,11 @@ export const BalancerChainIds = [
     '43114',
     '8453',
     '11155111',
+    '1924',
     '252',
     '34443',
     '999',
     '9745',
     '196',
-    '143',
 ];
 export const BeethovenChainIds = ['250', '10', '146'];
