@@ -1,0 +1,14 @@
+// Prisma schema entrypoint for schema-folder layout.
+// The rest of the schema is split across other `*.prisma` files in this directory.
+
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["prismaSchemaFolder"]
+  binaryTargets = ["native", "linux-arm64-openssl-1.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+

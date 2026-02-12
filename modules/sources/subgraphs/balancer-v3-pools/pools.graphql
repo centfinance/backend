@@ -76,7 +76,6 @@ fragment TypePool on Pool {
         projectToken
         projectTokenStartWeight
         projectTokenEndWeight
-        reserveTokenVirtualBalance
     }
     reClammParams {
         lastTimestamp

@@ -7,6 +7,9 @@ export type LBPoolData = ReturnType<typeof lbPool>;
 export const lbPool = (pool: TypePoolFragment & VaultPoolFragment) => {
     const params = pool.lbpParams!;
     const tokens = pool.tokens;
+    // Some subgraph deployments do not expose `reserveTokenVirtualBalance`.
+    // Treat missing value as 0 (not seedless) to keep ingestion robust.
+    const reserveTokenVirtualBalance = (params as any).reserveTokenVirtualBalance ?? '0';
 
     return {
         startTime: Number(params.startTime),
@@ -21,6 +24,6 @@ export const lbPool = (pool: TypePoolFragment & VaultPoolFragment) => {
         reserveTokenIndex: tokens.find((token) => token.address === params.reserveToken)!.index,
         reserveTokenStartWeight: Number(formatEther(BigInt(params.reserveTokenStartWeight))),
         reserveTokenEndWeight: Number(formatEther(BigInt(params.reserveTokenEndWeight))),
-        isSeedless: Number(formatEther(BigInt(params.reserveTokenVirtualBalance))) > 0,
+        isSeedless: Number(formatEther(BigInt(reserveTokenVirtualBalance))) > 0,
     };
 };

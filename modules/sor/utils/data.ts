@@ -129,7 +129,9 @@ async function getPools(chain: Chain, poolIds?: string[]): Promise<SORDbPool[]> 
                             totalLiquidity: { gte: 100 },
                         },
                         {
-                            chain: 'SEPOLIA',
+                            // Allow low-liquidity pools on testnets/dev chains.
+                            // (totalLiquidity is USD-based and often 0 for mock tokens)
+                            chain: { in: ['SEPOLIA', 'SWELLCHAIN_SEPOLIA'] },
                         },
                         {
                             pool: {

@@ -25,7 +25,7 @@ fi
 
 # Generate Prisma client
 echo "🔧 Generating Prisma client..."
-npx prisma generate --schema prisma/schema
+npx prisma generate
 
 # Build the project
 echo "🏗️  Building TypeScript..."

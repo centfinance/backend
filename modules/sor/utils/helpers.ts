@@ -6,6 +6,11 @@ import { replaceZeroAddressWithEth } from '../../web3/addresses';
 import { Address } from 'viem';
 import { Token, TokenAmount } from '@balancer/sdk';
 import config from '../../../config';
+import { getViemClient } from '../../sources/viem-client';
+import { parseAbi } from 'viem';
+
+const erc20DecimalsAbi = parseAbi(['function decimals() view returns (uint8)']);
+const decimalsCache = new Map<string, number>();
 
 export async function getTokenAmountHuman(tokenAddr: string, humanAmount: string, chain: Chain): Promise<TokenAmount> {
     const token = await getToken(tokenAddr, chain);
@@ -28,8 +33,30 @@ export const getToken = async (tokenAddr: string, chain: Chain): Promise<Token> 
         return new Token(parseInt(chainToIdMap[chain]), config[chain].weth.address as Address, 18);
     } else {
         const decimals = await tokenService.getTokenDecimals(tokenAddr, chain);
-        if (!decimals) throw Error(`Missing token from tokenService ${tokenAddr}`);
-        return new Token(parseInt(chainToIdMap[chain]), tokenAddr as Address, decimals);
+        if (decimals) {
+            return new Token(parseInt(chainToIdMap[chain]), tokenAddr as Address, decimals);
+        }
+
+        // Fallback for test/dev chains where token definitions may not exist yet in DB.
+        // This keeps SOR usable for freshly created pools & mock tokens.
+        const key = `${chain}:${tokenAddr.toLowerCase()}`;
+        const cached = decimalsCache.get(key);
+        if (cached !== undefined) {
+            return new Token(parseInt(chainToIdMap[chain]), tokenAddr as Address, cached);
+        }
+
+        try {
+            const client = getViemClient(chain);
+            const onchainDecimals = (await client.readContract({
+                address: tokenAddr as Address,
+                abi: erc20DecimalsAbi,
+                functionName: 'decimals',
+            })) as number;
+            decimalsCache.set(key, onchainDecimals);
+            return new Token(parseInt(chainToIdMap[chain]), tokenAddr as Address, onchainDecimals);
+        } catch (e) {
+            throw Error(`Missing token decimals for ${tokenAddr} on ${chain}`);
+        }
     }
 };
 

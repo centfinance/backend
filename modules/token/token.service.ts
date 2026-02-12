@@ -62,7 +62,22 @@ export class TokenService {
             this.cache.put(`${ALL_TOKENS_CACHE_KEY}:${chain}`, tokens, 5 * 60 * 1000);
         }
         if (addresses) {
-            return tokens.filter((token) => addresses.includes(token.address));
+            const normalized = addresses.map((a) => a.toLowerCase());
+            const inCache = tokens.filter((token) => normalized.includes(token.address));
+
+            // If the token cache was populated before new tokens were discovered/inserted (e.g. via pool reload),
+            // fall back to DB for any missing addresses and refresh the cache.
+            const missing = normalized.filter((addr) => !inCache.some((t) => t.address === addr));
+            if (missing.length > 0) {
+                const fetched = await prisma.prismaToken.findMany({ where: { chain, address: { in: missing } } });
+                if (fetched.length > 0) {
+                    tokens.push(...fetched);
+                    this.cache.put(`${ALL_TOKENS_CACHE_KEY}:${chain}`, tokens, 5 * 60 * 1000);
+                }
+                return [...inCache, ...fetched];
+            }
+
+            return inCache;
         }
         return tokens;
     }

@@ -97,11 +97,11 @@ export const schema = gql`
         HYPEREVM
         MAINNET
         MODE
-        MONAD
         OPTIMISM
         PLASMA
         POLYGON
         SEPOLIA
+        SWELLCHAIN_SEPOLIA
         SONIC
         XLAYER
         ZKEVM

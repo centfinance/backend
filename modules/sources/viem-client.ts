@@ -15,7 +15,6 @@ import {
     sonic,
     plasma,
     xLayer,
-    monad,
 } from 'viem/chains';
 import { Chain } from '@prisma/client';
 import config from '../../config';
@@ -93,7 +92,25 @@ const chain2ViemChain = {
             },
         },
     }),
-    [Chain.MONAD]: monad,
+    [Chain.SWELLCHAIN_SEPOLIA]: defineChain({
+        id: 1924,
+        name: 'swellchain-sepolia',
+        nativeCurrency: {
+            decimals: 18,
+            name: 'Ether',
+            symbol: 'ETH',
+        },
+        rpcUrls: {
+            default: {
+                http: [config[Chain.SWELLCHAIN_SEPOLIA].rpcUrl],
+            },
+        },
+        contracts: {
+            multicall3: {
+                address: config[Chain.SWELLCHAIN_SEPOLIA].multicall3 as `0x${string}`,
+            },
+        },
+    }),
 };
 
 export const getViemClient = (chain: Chain, options?: { multicallBatch?: boolean; jsonRpcBatch?: boolean }) => {

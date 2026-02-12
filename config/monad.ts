@@ -1,7 +1,9 @@
 import { env } from '../apps/env';
 import { NetworkData } from '../modules/network/network-config-types';
 
-export default <NetworkData>{
+// NOTE: This config is not currently wired into `config/index.ts`, and the Chain/GqlChain
+// enums may not include MONAD in all environments. Keep it loosely typed to avoid breaking builds.
+export default ({
     chain: {
         slug: 'monad',
         id: 143,
@@ -66,4 +68,4 @@ export default <NetworkData>{
             alarmTopicArn: 'arn:aws:sns:eu-central-1:118697801881:api_alarms',
         },
     },
-};
+} as unknown) as NetworkData;

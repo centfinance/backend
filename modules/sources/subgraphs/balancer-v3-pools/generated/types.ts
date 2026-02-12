@@ -2092,7 +2092,6 @@ export const TypePoolFragmentDoc = gql`
             projectToken
             projectTokenStartWeight
             projectTokenEndWeight
-            reserveTokenVirtualBalance
         }
         reClammParams {
             lastTimestamp

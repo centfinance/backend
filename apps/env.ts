@@ -78,6 +78,67 @@ export const schema = {
         type: String,
         optional: true,
     },
+    // Swellchain Sepolia (chainId: 1924) overrides/config
+    SWELLCHAIN_SEPOLIA_RPC_URL: {
+        optional: true,
+        type: String,
+    },
+    SWELLCHAIN_SEPOLIA_WETH_ADDRESS: {
+        optional: true,
+        type: String,
+    },
+    SWELLCHAIN_SEPOLIA_MULTICALL_ADDRESS: {
+        optional: true,
+        type: String,
+    },
+    SWELLCHAIN_SEPOLIA_MULTICALL3_ADDRESS: {
+        optional: true,
+        type: String,
+    },
+    SWELLCHAIN_SEPOLIA_BALANCER_V3_SUBGRAPH_URL: {
+        optional: true,
+        type: String,
+    },
+    SWELLCHAIN_SEPOLIA_BALANCER_POOLS_V3_SUBGRAPH_URL: {
+        optional: true,
+        type: String,
+    },
+    SWELLCHAIN_SEPOLIA_BALANCER_V2_SUBGRAPH_URL: {
+        optional: true,
+        type: String,
+    },
+    SWELLCHAIN_SEPOLIA_COW_AMM_SUBGRAPH_URL: {
+        optional: true,
+        type: String,
+    },
+    SWELLCHAIN_SEPOLIA_GAUGE_SUBGRAPH_URL: {
+        optional: true,
+        type: String,
+    },
+    SWELLCHAIN_SEPOLIA_V3_VAULT_ADDRESS: {
+        optional: true,
+        type: String,
+    },
+    SWELLCHAIN_SEPOLIA_V3_ROUTER_ADDRESS: {
+        optional: true,
+        type: String,
+    },
+    SWELLCHAIN_SEPOLIA_V3_PROTOCOL_FEE_CONTROLLER: {
+        optional: true,
+        type: String,
+    },
+    SWELLCHAIN_SEPOLIA_V2_VAULT_ADDRESS: {
+        optional: true,
+        type: String,
+    },
+    SWELLCHAIN_SEPOLIA_V2_BALANCER_QUERIES_ADDRESS: {
+        optional: true,
+        type: String,
+    },
+    SWELLCHAIN_SEPOLIA_BAL_ADDRESS: {
+        optional: true,
+        type: String,
+    },
 };
 
 export const env: Env = load(schema, {
